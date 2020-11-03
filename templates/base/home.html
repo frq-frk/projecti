@@ -3,4 +3,20 @@
 {% block content %}
 {% include 'includes/header.html' %}
     Hey What's up??
+    {% if obj == 'none' %}
+        <div class="card">
+            <div class="card-body">
+                <pre><p> Task : {{o.title}}          Deadline : {{o.deadline}}         completion status : {{o.done}} </p></pre>
+            </div>
+        </div>
+        
+    {% else %}
+        {% for o in obj %}
+            <div class="card">
+                <div class="card-body">
+                     Task : {{o.title}} Deadline : {{o.deadline}} completion status : {{o.done}}
+                 </div>
+            </div>
+         {% endfor %}
+    {% endif %}
 {% endblock %}
