@@ -9,3 +9,6 @@ class Task(models.Model):
     deadline = models.DateField()
     done = models.BooleanField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE, null = True, blank = True)
+
+    # def __str__(self):
+    #     return self.pk

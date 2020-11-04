@@ -2,21 +2,29 @@
 
 {% block content %}
 {% include 'includes/header.html' %}
-    Hey What's up??
+    <h3>Tasks Scheduled for you</h3>
     {% if obj == 'none' %}
         <div class="card">
             <div class="card-body">
-                <pre><p> Task : {{o.title}}          Deadline : {{o.deadline}}         completion status : {{o.done}} </p></pre>
+                <p><pre>No Tasks scheduled for you </pre> </p>
             </div>
         </div>
         
     {% else %}
+    
         {% for o in obj %}
             <div class="card">
                 <div class="card-body">
-                     Task : {{o.title}} Deadline : {{o.deadline}} completion status : {{o.done}}
-                 </div>
+                     <p> Task : {{o.title}}</p> <p> Deadline : {{o.deadline}} </p>
+                    <form method="POST" action="{% url 'updatestatus' pk=o.pk %}"> {% csrf_token %}
+                    completed : <input type="checkbox" name="status" {% if o.done %} checked = 'checked'{% endif %}>
+                    <input type="submit" value="update" class="btn btn-dark">
+                </form>
+                </div>
+                 
             </div>
          {% endfor %}
+         
+  
     {% endif %}
 {% endblock %}

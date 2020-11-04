@@ -6,4 +6,5 @@ urlpatterns = [
     path('',views.home,name = 'home'),
     re_path(r'^login/$',auth_views.LoginView.as_view(template_name = 'base/login.html'),name = 'login'),
 	re_path(r'^logout/$',auth_views.LogoutView.as_view(),name = 'logout'),
+    re_path(r'updatestatus/(?P<pk>\d+)/$',views.updatestatus,name = 'updatestatus'),
 ]
