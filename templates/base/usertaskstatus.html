@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <h3>admin</h3>
+    {% for o in obj %}
+        <div class="card">
+             <div class="card-body">
+             <p>task : {{o.title}}</p>
+             <p>deadline to complete : {{o.deadline}}</p>
+             <p>status : {{o.done}}</p>
+             {{o.user}}
+             <p></p>
+            </div>
+         </div>
+        
+        
+        
+    {% endfor %}
+{% endblock %}

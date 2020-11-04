@@ -18,10 +18,25 @@ def home(request):
     return render(request,template,{'obj': obj})
 
 def updatestatus(request,pk):
-    obj = Task.objects.get(pk = pk)
+    obj = Task.objects.get(pk = pk)    
     if obj.done:
         obj.done = 'False'
     else:
         obj.done = 'True'
     obj.save()
     return redirect(home)
+
+def usertaskstatus(request):
+    template = 'base/usertaskstatus.html'
+    # value_list = Task.objects.values_list(
+    #     'user', flat=True
+    #     ).distinct()
+    # print(value_list)
+    # group_by_value = {}
+    # for value in value_list:
+    #     group_by_value[value] = Task.objects.filter(user=value)
+    # print(group_by_value)
+
+    obj = Task.objects.all()
+    
+    return render(request,template,{'obj' : obj})
