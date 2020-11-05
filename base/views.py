@@ -2,6 +2,7 @@ from django.shortcuts import render,get_list_or_404,redirect
 from .models import Task
 from django.contrib.auth.decorators import login_required
 from .forms import StatusFormSet
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -37,6 +38,7 @@ def usertaskstatus(request):
     #     group_by_value[value] = Task.objects.filter(user=value)
     # print(group_by_value)
 
+    
     obj = Task.objects.all()
     
     return render(request,template,{'obj' : obj})
