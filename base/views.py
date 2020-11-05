@@ -19,12 +19,11 @@ def home(request):
     return render(request,template,{'obj': obj})
 
 def updatestatus(request,pk):
-    obj = Task.objects.get(pk = pk)    
+    obj = Task.objects.get(pk = pk)
     if obj.done:
-        obj.done = 'False'
+        Task.objects.filter(pk = pk).update(done= False)
     else:
-        obj.done = 'True'
-    obj.save()
+        Task.objects.filter(pk = pk).update(done = True)
     return redirect(home)
 
 def usertaskstatus(request):

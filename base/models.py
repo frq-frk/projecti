@@ -19,13 +19,13 @@ class Task(models.Model):
 def assign_user(sender,instance,**kwargs):
 
     qs = Task.objects.values('user').annotate(Count('id')).order_by()
-    print(qs)
+    # print(qs)
     l = list(qs)
-    print(l)
+    # print(l)
     u = min(l,key=lambda x: x['id__count'])
     k = u['user']
     user = User.objects.get(pk = k)
-    print(user)
+    # print(user)
     instance.user = user
 
 pre_save.connect(assign_user,sender = Task)
