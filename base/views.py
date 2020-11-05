@@ -3,6 +3,7 @@ from .models import Task
 from django.contrib.auth.decorators import login_required
 from .forms import StatusFormSet
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 # Create your views here.
@@ -16,7 +17,8 @@ def home(request):
         obj = 'none'
    
     # obj = get_list_or_404(Task,user = request.user)
-    return render(request,template,{'obj': obj})
+    users = User.objects.filter(~Q(id = 1))
+    return render(request,template,{'obj': obj,'users' : users})
 
 def updatestatus(request,pk):
     obj = Task.objects.get(pk = pk)
@@ -26,7 +28,7 @@ def updatestatus(request,pk):
         Task.objects.filter(pk = pk).update(done = True)
     return redirect(home)
 
-def usertaskstatus(request):
+def usertaskstatus(request,id):
     template = 'base/usertaskstatus.html'
     # value_list = Task.objects.values_list(
     #     'user', flat=True
@@ -38,6 +40,6 @@ def usertaskstatus(request):
     # print(group_by_value)
 
     
-    obj = Task.objects.all()
+    obj = Task.objects.filter(user = id)
     
     return render(request,template,{'obj' : obj})

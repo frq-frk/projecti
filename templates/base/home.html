@@ -29,6 +29,19 @@
     {% endif %}
 
     {% if user.is_superuser %}
-            This appears only if you are super user
+            (No tasks for you admin:)<br>
+         
+            <h3> List of users here :</h3>
+            {% for u in users %}
+                
+                
+                <div class="card container">
+                    
+                        <a href="{% url 'usertaskstatus' id=u.id %}">{{u}}</a>
+                    
+                </div>
+                 
+                 {% endfor %}
+           
     {% endif %}
 {% endblock %}
